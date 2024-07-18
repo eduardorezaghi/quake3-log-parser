@@ -1,0 +1,9 @@
+# Ignore VSCode settings
+.vscode/
+
+
+# Ignore .pytest_cache
+.pytest_cache
+
+# Ignore __pycache__
+__pycache__/

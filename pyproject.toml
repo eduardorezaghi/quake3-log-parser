@@ -1,0 +1,90 @@
+[tool.poetry]
+name = "quake3-log-parser"
+version = "0.0.1"
+description = "A simple log parsing utility written in modern Python."
+authors = ["Eduardo Rezaghi <eduardo.rezaghi@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+tinydb = "^4.8.0"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.5.3"
+ruff-lsp = "^0.0.54"
+pytest = "^8.2.2"
+pytest-cov = "^5.0.0"
+pytest-mock = "^3.14.0"
+pytest-xdist = "^3.6.1"
+
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra"
+testpaths = [
+    "tests",
+]
+console_output_style = "progress"
+log_cli_date_format = "%d-%m-%Y %H:%M:%S"
+
+[tool.coverage.run]
+include = ["tests/*"]
+branch = true
+omit = [
+    "tests/*",
+    "venv/*",
+    "site-packages/*",
+    "dist/*",
+    "build/*",
+    "node_modules/*",
+    "buck-out/*",
+    ".tox/*",
+    ".svn/*",
+    ".ruff_cache/*",
+    ".pytype/*",
+    ".pytest_cache/*",
+    ".pyenv/*",
+    ".nox/*",
+    ".mypy_cache/*",
+    ".ipynb_checkpoints/*",
+    ".hg/*",
+    ".git/*",
+    ".git-rewrite/*",
+    ".eggs/*",
+    ".direnv/*",
+    ".bzr/*",
+    ".vscode/*",
+    "__pypackages__/*",
+    "_build/*",
+]
+
+[tool.coverage.report]
+# Regexes for lines to exclude from consideration
+exclude_also = [
+    # Don't complain about missing debug-only code:
+    "def __repr__",
+    "if self\\.debug",
+
+    # Don't complain if tests don't hit defensive assertion code:
+    "raise AssertionError",
+    "raise NotImplementedError",
+
+    # Don't complain if non-runnable code isn't run:
+    "if 0:",
+    "if __name__ == .__main__.:",
+
+    # Don't complain about abstract methods, they aren't run:
+    "@(abc\\.)?abstractmethod",
+    ]
+
+ignore_errors = true
+
+
+[tool.coverage.html]
+directory = "coverage_html_report"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
