@@ -29,4 +29,4 @@ def test_parse_players_count(mock_file):
 
     # Assert
     assert len(log_parser.games[0].players) == 2
-    assert log_parser.games[0].players == ["Isgalamido", "Assasinu Credi"]
+    assert log_parser.games[0].players == set(["Isgalamido", "Assasinu Credi"])

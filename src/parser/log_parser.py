@@ -40,7 +40,7 @@ class QuakeLogParser(AbstractLogParser):
         if re.search(r"ClientUserinfoChanged", line):
             # Extract the player name from the log line
             player = re.search(r"n\\([^\\]*)", line).group(1)
-            self.current_game.players.append(player)
+            self.current_game.players.add(player)
 
     def _start_new_game(self):
         self.current_game = QuakeLog(game_id=len(self.games) + 1)
