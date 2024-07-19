@@ -26,7 +26,15 @@ class QuakeLogParser(AbstractLogParser):
         for line in self._line_parser():
             self._count_games(line)
 
-        return {"game_count": len(self.games)}
+        return self._group_game_results()
+
+    def _group_game_results(self):
+        parsed_games = []
+        for game in self.games:
+            game_result = game.__dict__()
+            parsed_games.append(game_result)
+
+        return parsed_games
 
     def match_death_cause(self, log_line):
         pass
@@ -44,5 +52,3 @@ class QuakeLogParser(AbstractLogParser):
         if self.current_game:
             self.games.append(self.current_game)
             self.current_game = None
-
-    def _get_world_kill_count(self): ...
