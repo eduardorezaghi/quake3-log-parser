@@ -14,7 +14,7 @@ class QuakeLogParser(AbstractLogParser):
     }
 
     def __init__(self, log_file_path: Path):
-        self.log_file_path: Path = log_file_path
+        super().__init__(log_file_path)
         self.log_file = open(log_file_path, "r")
         self.games: list[QuakeLog] = []
         self.current_game: QuakeLog | None = None

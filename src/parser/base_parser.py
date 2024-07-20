@@ -12,10 +12,8 @@ class AbstractLogParser(abc.ABC):
         """
         Constructor for the AbstractLogParser class.
         :param log_file_path: The path to the log file to be parsed.
-        :param log_file: The file object representing the log file.
         """
         self.log_file_path = Path(log_file_path)
-        self.log_file = None
 
     @abc.abstractmethod
     def _line_parser(self, line):
