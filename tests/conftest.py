@@ -38,23 +38,11 @@ def log_file_fixture(request):
     params=[
         (
             "tests/fixtures/qlog_shard_4.log",
-            {
-                "<world>": 2,
-                "Isgalamido": -1,
-                "Assasinu Credi": -1,
-                "Dono da Bola": 1,
-                "Mal": -1,
-                "Oootsimo": 1,
-                "Zeh": -1,
-            },
+            4,
         ),
         (
             "tests/fixtures/qlog_shard_5.log",
-            {
-                "<world>": 1,
-                "Dono da Bola": 2,
-                "Zeh": -3,
-            }
+            5,
         )
     ]
 )

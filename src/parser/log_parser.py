@@ -36,7 +36,7 @@ class QuakeLogParser(AbstractLogParser):
         if re.search(r"InitGame", line):
             self._start_new_game()
         # Catched a bug in the log! ShutdownGame is not always the end of a game.
-        # An end-game is a line with ShutdownGame or with 
+        # An end-game is a line with ShutdownGame or with
         # First, check if there is a game in progress, THEN check if the line is ShutdownGame OR a line with hh:mm ---- ...
         elif self.current_game and (
             re.search(r"ShutdownGame", line) or re.search(r"\d+\s+\d+:\d+\s+-+", line)
@@ -62,12 +62,15 @@ class QuakeLogParser(AbstractLogParser):
                 death_cause, QuakeDeathCause.MOD_UNKNOWN
             )
 
-            self.current_game.kills[killer] = self.current_game.kills.get(killer, 0) + 1
-            self.current_game.kills[victim] = self.current_game.kills.get(victim, 0) - 1
-            
-            if killer != victim and killer != "<world>":
-                self.current_game.total_kills += 1
+            self.current_game.kills_score[killer] = (
+                self.current_game.kills_score.get(killer, 0) + 1
+            )
+            self.current_game.kills_score[victim] = (
+                self.current_game.kills_score.get(victim, 0) - 1
+            )
 
+            if killer != victim and killer != "<world>":
+                self.current_game._total_kills += 1
 
     def _start_new_game(self) -> None:
         self.current_game = QuakeLog(game_id=len(self.games) + 1)
