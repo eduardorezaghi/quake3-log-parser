@@ -29,8 +29,11 @@ FROM python:3.12-slim AS runtime
 
 ENV VIRTUAL_ENV=/app/.venv
 ENV PATH="/app/.venv/bin:$PATH"
+ENV PYTHONPATH=/app
 
 COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
+WORKDIR /app
+COPY . .
 
-ENTRYPOINT ["bash"]
+CMD ["python"]
