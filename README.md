@@ -20,6 +20,7 @@ quake3-log-parser/
 4. [Installation](#installation)\
 5. [Running the parser](#running-the-parser)
     1. [Summarized game information](#summarized-game-information)
+    2. [Summarized grouped kills by game information](#summarized-grouped-kills-by-game-information)
 6. [Running the tests](#running-the-tests)
 
 
@@ -30,7 +31,7 @@ quake3-log-parser/
 
 ## Dependencies
 
-- Python 3.11 or higher
+- Python 3.12 or higher
 - `poetry`
 - `pytest`
 - `pytest-cov`
@@ -60,7 +61,7 @@ This will run the parser and remove the container once it finishes.
 
 ## Installation
 
-First, you must ensure that you have Python 3.11 or higher installed on your machine. 
+First, you must ensure that you have Python 3.12 or higher installed on your machine. 
 You can download it from the [official website](https://www.python.org/downloads/), 
 or using a tool like [pyenv](https://github.com/pyenv/pyenv) or [asdf](https://asdf-vm.com/).
 
@@ -97,7 +98,7 @@ For example, running `python -m src.main ./qgames.log` will parse the `qgames.lo
 The available output formats are as follows.
 
 ### Summarized game information
-`python -m src.main ./qgames.log`.
+`python -m src.main ./logs/qgames.log`.
 
 ```json
 [
@@ -138,6 +139,37 @@ The available output formats are as follows.
         "Mocinha": -1,
         "Dono da Bola": -1,
         "Zeh": -2
+      }
+    }
+  },
+  ...
+]
+```
+
+### Summarized grouped kills by game information
+`python -m src.main ./logs/qgames.log --group-deaths`
+```json
+[
+  {
+    "game_1": {
+      "kills_by_means": {}
+    }
+  },
+  {
+    "game_2": {
+      "kills_by_means": {
+        "MOD_TRIGGER_HURT": 7,
+        "MOD_ROCKET_SPLASH": 1,
+        "MOD_FALLING": 1
+      }
+    }
+  },
+  {
+    "game_3": {
+      "kills_by_means": {
+        "MOD_TRIGGER_HURT": 2,
+        "MOD_ROCKET": 1,
+        "MOD_FALLING": 1
       }
     }
   },
