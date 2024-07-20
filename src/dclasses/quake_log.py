@@ -8,6 +8,7 @@ class QuakeLog:
     # Save the players in a set to avoid duplicates (if a player connects more than once)
     players: set[str] = field(default_factory=set)
     kills_score: dict[str, int] = field(default_factory=dict)
+    kills_by_means: dict[str, int] = field(default_factory=dict)
     _total_kills: int = 0
 
     @property
@@ -31,6 +32,24 @@ class QuakeLog:
                 reverse=True,
             )
         )
+
+    @property
+    def get_kill_by_means_report(self) -> dict[str, int]:
+        return dict(
+            # Sorts the kills by means dictionary by the number of kills in descending order
+            sorted(
+                self.kills_by_means.items(),
+                # Uses the number of kills as the sorting key
+                key=lambda item: item[1],
+                # Descending order (highest number of kills first)
+                reverse=True,
+            )
+        )
+
+    def kill_by_means_dict(self) -> dict[str, dict]:
+        return {
+            f"game_{self.game_id}": {"kills_by_means": self.get_kill_by_means_report}
+        }
 
     def to_dict(self) -> dict[str, dict]:
         return {
