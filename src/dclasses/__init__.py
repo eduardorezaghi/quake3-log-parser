@@ -1,3 +1,3 @@
-from .quake_log import QuakeLog
+from .quake_log import QuakeLog, QuakeLogEncoder
 
-__all__ = ["QuakeLog"]
+__all__ = ["QuakeLog","QuakeLogEncoder"]

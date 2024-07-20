@@ -1,4 +1,5 @@
 import re
+from pathlib import Path
 
 from src.dclasses import QuakeLog
 from src.enums import QuakeDeathCause
@@ -11,8 +12,8 @@ class QuakeLogParser(AbstractLogParser):
         cause.value: cause for cause in QuakeDeathCause
     }
 
-    def __init__(self, log_file_path):
-        self.log_file_path = log_file_path
+    def __init__(self, log_file_path: Path):
+        self.log_file_path: Path = log_file_path
         self.log_file = open(log_file_path, "r")
         self.games: list[QuakeLog] = []
         self.current_game: QuakeLog | None = None
@@ -25,7 +26,7 @@ class QuakeLogParser(AbstractLogParser):
     def _group_game_results(self):
         parsed_games = []
         for game in self.games:
-            game_result = game.__dict__()
+            game_result = game.to_dict()
             parsed_games.append(game_result)
 
         return parsed_games

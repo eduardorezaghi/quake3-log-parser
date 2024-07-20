@@ -77,4 +77,11 @@ poetry shell
 
 ## Running the parser
 ---
+You can use python to run the CLI parser.
+The most basic usage is to run the parser with the log file as an argument:
 
+```bash
+python -m src.main <path_to_log_file>
+```
+
+For example, running `python -m src.main ./qgames.log` will parse the `qgames.log` file, returning the parsed data.
