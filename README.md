@@ -40,9 +40,11 @@ To do so, you must first build the image:
 docker build -t quake3-log-parser .
 ```
 
-Then, you can run the image with the following command:
+Then, you can run the image with the following command.  
+Make sure you replace `./logs/qgames.log` with the path to the log file you want to parse.
+Example (assuming you are in the project's root directory):
 ```bash
-docker run --rm --name quake3-log-parse -it quake3-log-parser
+docker run --rm --name "quake3-log-parser" -v $(pwd):/app/logs -it quake3-log-parser ./qgames.log
 ```
 This will run the parser and remove the container once it finishes.
 
