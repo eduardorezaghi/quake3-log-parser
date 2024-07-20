@@ -13,6 +13,15 @@ quake3-log-parser/
 ├── pyproject.toml
 └── ruff.toml
 ```
+## Table of Contents
+1. [Author](#author)
+2. [Dependencies](#dependencies)
+3. [Usage (via Docker)](#usage-via-docker)
+4. [Installation](#installation)\
+5. [Running the parser](#running-the-parser)
+    1. [Summarized game information](#summarized-game-information)
+6. [Running the tests](#running-the-tests)
+
 
 
 ## Author
@@ -78,12 +87,63 @@ poetry shell
 
 
 ## Running the parser
----
 You can use python to run the CLI parser.
 The most basic usage is to run the parser with the log file as an argument:
 
 ```bash
-python -m src.main <path_to_log_file>
+python -m src.main /path/to/logfile.log
+```
+For example, running `python -m src.main ./qgames.log` will parse the `qgames.log` file, returning the parsed data.  
+The available output formats are as follows.
+
+### Summarized game information
+`python -m src.main ./qgames.log`.
+
+```json
+[
+  {
+    "game_1": {
+      "total_kills": 0,
+      "players": [
+        "Isgalamido"
+      ],
+      "kills": {}
+    }
+  },
+  {
+    "game_2": {
+      "total_kills": 9,
+      "players": [
+        "Isgalamido",
+        "Mocinha",
+        "Dono da Bola"
+      ],
+      "kills": {
+        "Mocinha": -1,
+        "Isgalamido": -7
+      }
+    }
+  },
+  {
+    "game_3": {
+      "total_kills": 4,
+      "players": [
+        "Isgalamido",
+        "Zeh",
+        "Mocinha",
+        "Dono da Bola"
+      ],
+      "kills": {
+        "Isgalamido": 1,
+        "Mocinha": -1,
+        "Dono da Bola": -1,
+        "Zeh": -2
+      }
+    }
+  },
+  ...
+]
 ```
 
-For example, running `python -m src.main ./qgames.log` will parse the `qgames.log` file, returning the parsed data.
+# Running the tests
+See [TESTING.MD](./TESTING.MD) for instructions on how to run the tests.
