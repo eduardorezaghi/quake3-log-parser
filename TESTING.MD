@@ -27,13 +27,13 @@ Example of the coverage report:
 ---------- coverage: platform linux, python 3.12.4-final-0 -----------
 Name                        Stmts   Miss Branch BrPart  Cover   Missing
 -----------------------------------------------------------------------
-src/dclasses/quake_log.py      13      0      6      0   100%
+src/dclasses/quake_log.py      24      0     12      0   100%
 src/enums/enums.py             30      0      0      0   100%
-src/main.py                    16      6      2      1    61%   8-10, 18-20
-src/parser/base_parser.py       6      2      0      0    67%   17-18
-src/parser/log_parser.py       53      0     20      1    99%   79->exit
+src/main.py                    20      0      4      0   100%
+src/parser/base_parser.py       5      0      0      0   100%
+src/parser/log_parser.py       63      0     22      0   100%
 -----------------------------------------------------------------------
-TOTAL                         118      8     28      2    93%
+TOTAL                         142      0     38      0   100%
 Coverage HTML written to dir coverage_html_report
 ```
 
