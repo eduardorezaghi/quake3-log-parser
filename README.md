@@ -17,7 +17,7 @@ quake3-log-parser/
 1. [Author](#author)
 2. [Dependencies](#dependencies)
 3. [Usage (via Docker)](#usage-via-docker)
-4. [Installation](#installation)\
+4. [Installation](#installation)
 5. [Running the parser](#running-the-parser)
     1. [Summarized game information](#summarized-game-information)
     2. [Summarized grouped kills by game information](#summarized-grouped-kills-by-game-information)
@@ -98,7 +98,7 @@ For example, running `python -m src.main ./qgames.log` will parse the `qgames.lo
 The available output formats are as follows.
 
 ### Summarized game information
-`python -m src.main ./logs/qgames.log`.
+`python -m src.main ./logs/qgames.log`
 
 ```json
 [
