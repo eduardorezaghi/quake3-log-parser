@@ -1,0 +1,21 @@
+-------------
+  6:10 InitGame: \capturelimit\8\g_maxGameClients\0\timelimit\15\fraglimit\20\dmfla
+  6:17 Kill: 4 6 7: Dono da Bola killed Zeh by MOD_ROCKET_SPLASH
+  6:17 Kill: 4 6 7: Dono da Bola killed Zeh by MOD_ROCKET_SPLASH
+  6:17 Kill: 4 6 7: Dono da Bola killed Zeh by MOD_ROCKET_SPLASH
+  6:20 Kill: 4 6 7: Zeh killed Dono da Bola by MOD_SHOTGUN
+  6:21 Kill: 4 6 7: <world> killed Zeh by MOD_FALLING
+  6:34 ShutdownGame:
+  6:34 ------------------------------------------------------------
+
+
+# summary
+--------
+- total kills: 5
+- players: 
+  - Dono da Bola
+  - Zeh
+- scoreboard (kills minus deaths):
+    - Dono da Bola: 2
+    - Zeh: -3
+    - world: 1

@@ -32,3 +32,20 @@ def log_file_fixture(request):
     with open(file_path, "r") as f:
         content = f.read()
     yield content, expected_game_count
+
+
+@pytest.fixture(
+    params=[
+        (
+            "tests/fixtures/qlog_shard_4.log",
+            4,
+        ),
+        (
+            "tests/fixtures/qlog_shard_5.log",
+            5,
+        )
+    ]
+)
+def kill_counts_fixture(request):
+    file_path, expected_kill_counts = request.param
+    yield file_path, expected_kill_counts
