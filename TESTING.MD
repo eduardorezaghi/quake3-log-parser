@@ -48,8 +48,9 @@ pytest
 ```
 
 ## Running the tests (via Docker)
-To run the tests using Docker, you can use the following command:
+To run the tests using Docker, you can use the following command:  
+> _Note, though: running the tests via Docker will not generate the coverage report in your local machine, for now._
 
-```
-docker run --rm --name "quake3-log-parser" -it quake3-log-parser pytest
+```bash
+docker run --rm --name "quake3-log-parser" -it quake3-log-parser pytest 
 ```

@@ -33,7 +33,14 @@ ENV PYTHONPATH=/app
 
 COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
-WORKDIR /app
-COPY . .
 
-CMD ["python"]
+COPY src/ /app/src/
+COPY tests/ /app/tests/
+COPY pyproject.toml /app/pyproject.toml
+COPY entrypoint.sh /app/entrypoint.sh
+
+WORKDIR /app
+RUN chmod +x entrypoint.sh
+
+
+ENTRYPOINT ["./entrypoint.sh"]
