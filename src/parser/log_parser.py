@@ -76,9 +76,8 @@ class QuakeLogParser(AbstractLogParser):
         self.current_game = QuakeLog(game_id=len(self.games) + 1)
 
     def _end_current_game(self) -> None:
-        if self.current_game:
-            self.games.append(self.current_game)
-            self.current_game = None
+        self.games.append(self.current_game)
+        self.current_game = None
 
     def parse(self) -> list[dict]:
         for line in self._line_parser():
