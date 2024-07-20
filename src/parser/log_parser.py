@@ -32,6 +32,14 @@ class QuakeLogParser(AbstractLogParser):
 
         return parsed_games
 
+    def _group_deaths_by_means(self) -> list[dict]:
+        parsed_games = []
+        for game in self.games:
+            game_result = game.kill_by_means_dict()
+            parsed_games.append(game_result)
+
+        return parsed_games
+
     def _count_games(self, line) -> None:
         if re.search(r"InitGame", line):
             self._start_new_game()
@@ -62,6 +70,13 @@ class QuakeLogParser(AbstractLogParser):
                 death_cause, QuakeDeathCause.MOD_UNKNOWN
             )
 
+            # Only count kill means if the killer is different from the victim
+            # (don't count suicides or accidental deaths)
+            if killer != victim:
+                self.current_game.kills_by_means[death_cause.value] = (
+                    self.current_game.kills_by_means.get(death_cause.value, 0) + 1
+                )
+
             self.current_game.kills_score[killer] = (
                 self.current_game.kills_score.get(killer, 0) + 1
             )
@@ -69,6 +84,7 @@ class QuakeLogParser(AbstractLogParser):
                 self.current_game.kills_score.get(victim, 0) - 1
             )
 
+            # Count the total number of kills in the game, excluding suicides and accidental deaths
             if killer != victim and killer != "<world>":
                 self.current_game._total_kills += 1
 
@@ -86,3 +102,8 @@ class QuakeLogParser(AbstractLogParser):
             self._count_kills(line)
 
         return self._group_game_results()
+
+    def parse_grouped_deaths_by_means(self) -> list[dict]:
+        self.parse()
+
+        return self._group_deaths_by_means()
