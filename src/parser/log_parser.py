@@ -35,7 +35,12 @@ class QuakeLogParser(AbstractLogParser):
     def _count_games(self, line) -> None:
         if re.search(r"InitGame", line):
             self._start_new_game()
-        elif re.search(r"ShutdownGame", line) and self.current_game:
+        # Catched a bug in the log! ShutdownGame is not always the end of a game.
+        # An end-game is a line with ShutdownGame or with hh:mm ------------------------------------------------------------ (60 dashes)
+        # First, check if there is a game in progress, THEN check if the line is ShutdownGame OR a line with hh:mm ---- ...
+        elif self.current_game and (
+            re.search(r"ShutdownGame", line) or re.search(r"\d{2}:\d{2} -{60}", line)
+        ):
             self._end_current_game()
 
     def _count_players(self, line) -> None:
