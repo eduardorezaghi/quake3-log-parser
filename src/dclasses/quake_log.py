@@ -14,26 +14,30 @@ class QuakeLog:
     def get_total_kills(self) -> int:
         return self._total_kills + self.kills_score.get("<world>", 0)
 
+    @property
+    def get_kill_by_player(self) -> dict[str, int]:
+        # Create a copy of the kills dictionary to avoid modifying the original,
+        # and remove the "<world>" key from the copy
+        kills = self.kills_score.copy()
+        kills.pop("<world>", None)
+
+        return dict(
+            # Sorts the kills dictionary by the number of kills in descending order
+            sorted(
+                kills.items(),
+                # Uses the number of kills as the sorting key
+                key=lambda item: item[1],
+                # Descending order (highest number of kills first)
+                reverse=True,
+            )
+        )
+
     def to_dict(self) -> dict[str, dict]:
         return {
             f"game_{self.game_id}": {
                 "total_kills": self.get_total_kills,
                 "players": list(self.players),
-                "kills": dict(
-                    # Sorts the kills dictionary by the number of kills in descending order
-                    sorted(
-                        # Remove the <world> player from the kills dictionary, but keep the kills totalized
-                        {
-                            player: kills
-                            for player, kills in self.kills_score.items()
-                            if player != "<world>"
-                        }.items(),
-                        # Uses the number of kills as the sorting key
-                        key=lambda item: item[1],
-                        # Descending order (highest number of kills first)
-                        reverse=True,
-                    )
-                ),
+                "kills": self.get_kill_by_player,
             }
         }
 
